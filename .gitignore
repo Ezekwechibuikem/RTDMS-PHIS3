@@ -41,3 +41,7 @@ Thumbs.db
 # Database
 *.db
 *.sqlite
+
+# myscripts
+start.ps1
+database.ps1

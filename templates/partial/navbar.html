@@ -1,0 +1,77 @@
+{% load static %}
+
+<div class="navbar-logo">
+    <button class="btn navbar-toggler navbar-toggler-humburger-icon hover-bg-transparent" type="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalCollapse" aria-controls="navbarVerticalCollapse" aria-expanded="false" aria-label="Toggle Navigation"><span class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
+    <a class="navbar-brand me-1 me-sm-3" href="{% url 'dashboards:dashboard' %}">
+    <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center"><img src="{% static 'assets/img/logos/RTDMS-LOGO.png' %}" alt="phoenix" width="110" />
+        {% comment %} <h2 class="logo-text ms-2 d-none d-sm-block">RTDMS</h2> {% endcomment %}
+        </div>
+    </div>
+    </a>
+</div>
+
+<ul class="navbar-nav navbar-nav-icons flex-row ms-auto">
+    <li class="nav-item dropdown"><a class="nav-link lh-1 pe-0" id="navbarDropdownUser" href="#!" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
+        <div class="avatar avatar-l">
+            {% if user.image %}
+                <img class="rounded-circle"
+                    src="{{ user.image.url }}"
+                    alt="Profile"
+                    style="width:40px; height:40px; object-fit:cover;">
+            {% else %}
+                {% if user.gender == "FEMALE" %}
+                    <img class="rounded-circle"
+                        src="{% static 'assets/img/display-pic/female_avatar.png' %}"
+                        alt="Female Default Avatar"
+                        style="width:40px; height:40px; object-fit:cover;">
+                {% else %}
+                    <img class="rounded-circle"
+                        src="{% static 'assets/img/display-pic/male_avatar.png' %}"
+                        alt="Male Default Avatar"
+                        style="width:40px; height:40px; object-fit:cover;">
+                {% endif %}
+            {% endif %}
+        </div>
+    </a>
+    <div class="dropdown-menu dropdown-menu-end navbar-dropdown-caret py-0 dropdown-profile shadow border" aria-labelledby="navbarDropdownUser">
+        <div class="card position-relative border-0">
+        <div class="card-body p-0">
+            <div class="text-center pt-4 pb-3">
+            <div class="avatar avatar-l">
+                {% if user.image %}
+                    <img class="rounded-circle"
+                        src="{{ user.image.url }}"
+                        alt="Profile"
+                        style="width:40px; height:40px; object-fit:cover;">
+                {% else %}
+                    {% if user.gender == "FEMALE" %}
+                        <img class="rounded-circle"
+                            src="{% static 'assets/img/display-pic/female_avatar.png' %}"
+                            alt="Female Default Avatar"
+                            style="width:40px; height:40px; object-fit:cover;">
+                    {% else %}
+                        <img class="rounded-circle"
+                            src="{% static 'assets/img/display-pic/male_avatar.png' %}"
+                            alt="Male Default Avatar"
+                            style="width:40px; height:40px; object-fit:cover;">
+                    {% endif %}
+                {% endif %}
+            </div>
+            <h6 class="mt-2 text-body-emphasis">{{ user.first_name }} {{ user.last_name }}</h6>
+            </div>
+        </div>
+        <div class="overflow-auto scrollbar" style="height: 5rem;">
+            <ul class="nav d-flex flex-column mb-2 pb-1">
+            <li class="nav-item"><a class="nav-link px-3 d-block" href="#!"> <span class="me-2 text-body align-bottom" data-feather="user"></span><span>Profile</span></a></li>
+            <li class="nav-item"><a class="nav-link px-3 d-block" href="#!"><span class="me-2 text-body align-bottom" data-feather="pie-chart"></span>Dashboard</a></li>
+            </ul>
+        </div>
+        <div class="card-footer p-0 border-top border-translucent">
+            <div class="px-3"> <a class="btn btn-phoenix-secondary d-flex flex-center w-100" href="{% url 'accounts:logout' %}"> <span class="me-2" data-feather="log-out"> </span>Log out</a></div>
+            <div class="my-2 text-center fw-bold fs-10 text-body-quaternary"><a class="text-body-quaternary me-1" href="#!">Privacy policy</a>&bull;<a class="text-body-quaternary mx-1" href="#!">Terms</a>&bull;<a class="text-body-quaternary ms-1" href="#!">Cookies</a></div>
+        </div>
+        </div>
+    </div>
+    </li>
+</ul>

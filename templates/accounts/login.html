@@ -1,0 +1,43 @@
+{% extends "account-base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="row flex-center min-vh-100 py-5">
+  <div class="col-sm-10 col-md-8 col-lg-5 col-xl-5 col-xxl-3"><a class="d-flex flex-center text-decoration-none mb-4"
+      href="{% url 'accounts:login' %}">
+      <div class="d-flex align-items-center fw-bolder fs-3 d-inline-block "><img src="{% static 'assets/img/logos/LOGO-removebg.png' %}"
+          alt="RTDMS login Logo" width="150px" /></div>
+    </a>
+    <div class="text-center mb-7">
+      <h3 class="text-body-highlight">Login</h3>
+      <p class="text-body-tertiary">Get access to your account</p>
+    </div>
+    <div class="position-relative">
+      <hr class="bg-body-secondary mt-5 mb-4" />
+      <div class="divider-content-center">Welcome to RTDMS</div>
+    </div>
+    <form method="POST" autocomplete="off">
+    {% csrf_token %}
+      <div class="mb-3 text-start">
+          <label class="form-label">Email address</label>
+          <div class="form-icon-container">
+              {{ form.username }}
+              <span class="fas fa-user text-body fs-9 form-icon"></span>
+          </div>
+      </div>
+      <div class="mb-3 text-start">
+          <label class="form-label">Password</label>
+          <div class="form-icon-container" data-password="data-password">
+              {{ form.password }}
+              <span class="fas fa-key text-body fs-9 form-icon"></span>
+          </div>
+      </div>
+      <button type="submit" class="btn btn-primary w-100 mb-3">
+          Login
+      </button>
+  </form>
+  </div>
+</div>
+
+{% endblock %}

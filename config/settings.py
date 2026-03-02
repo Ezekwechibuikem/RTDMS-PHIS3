@@ -42,6 +42,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': (
+#         'rest_framework_simplejwt.authentication.JWTAuthentication',
+#     ),
+# }
+
+
 ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
@@ -61,6 +68,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
+AUTH_USER_MODEL = 'accounts.CustomUser'
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
@@ -107,8 +115,18 @@ USE_I18N = True
 
 USE_TZ = True
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+LOGIN_URL = 'accounts:login'
+LOGIN_REDIRECT_URL = 'dashboards:dashboard'
+LOGOUT_REDIRECT_URL = 'accounts:login'

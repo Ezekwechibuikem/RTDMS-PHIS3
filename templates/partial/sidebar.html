@@ -1,0 +1,66 @@
+{% load static %}
+
+{% comment %} <nav class="navbar navbar-vertical navbar-expand-lg" style="display:none;"> {% endcomment %}
+    <div class="collapse navbar-collapse" id="navbarVerticalCollapse">
+        <!-- scrollbar removed-->
+        <div class="navbar-vertical-content">
+        <ul class="navbar-nav flex-column" id="navbarVerticalNav">
+            <li class="nav-item">
+            <!-- parent pages-->
+            <div class="nav-item-wrapper"><a class="nav-link dropdown-indicator label-1" href="{% url 'dashboards:dashboard' %}" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="nv-home">
+                <div class="d-flex align-items-center">
+                    <div class="dropdown-indicator-icon-wrapper"></div><span class="nav-link-icon"><span data-feather="pie-chart"></span></span><span class="nav-link-text">Home</span>
+                </div>
+                </a>
+                
+            </div>
+            </li>
+            <li class="nav-item">
+            <!-- label-->
+            <p class="navbar-vertical-label">Apps</p>
+            <hr class="navbar-vertical-line" /><!-- parent pages-->
+            <div class="nav-item-wrapper"><a class="nav-link label-1" href="#" role="button" data-bs-toggle="" aria-expanded="false">
+                <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="book-open"></span></span><span class="nav-link-text-wrapper"><span class="nav-link-text">Attendance</span></span></div>
+                </a></div><!-- parent pages-->
+            <div class="nav-item-wrapper"><a class="nav-link label-1" href="#" role="button" data-bs-toggle="" aria-expanded="false">
+                <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="slack"></span></span><span class="nav-link-text-wrapper"><span class="nav-link-text">Shift</span></span></div>
+                </a></div><!-- parent pages-->
+            <div class="nav-item-wrapper"><a class="nav-link label-1" href="#" role="button" data-bs-toggle="" aria-expanded="false">
+                <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="user-minus"></span></span><span class="nav-link-text-wrapper"><span class="nav-link-text">Leave</span></span></div>
+                </a></div><!-- parent pages-->
+            <div class="nav-item-wrapper"><a class="nav-link label-1" href="#" role="button" data-bs-toggle="" aria-expanded="false">
+                <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="file-text"></span></span><span class="nav-link-text-wrapper"><span class="nav-link-text">History</span></span><span class="badge ms-2 badge badge-phoenix badge-phoenix-warning nav-link-badge">new</span></div>
+                </a></div><!-- parent pages-->
+            <div class="nav-item-wrapper"><a class="nav-link label-1" href="#" role="button" data-bs-toggle="" aria-expanded="false">
+                <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="edit"></span></span><span class="nav-link-text-wrapper"><span class="nav-link-text">Reports</span></span></div>
+                </a></div><!-- parent pages-->
+            <div class="nav-item-wrapper"><a class="nav-link label-1" href="#" role="button" data-bs-toggle="" aria-expanded="false">
+                <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="calendar"></span></span><span class="nav-link-text-wrapper"><span class="nav-link-text">Calendar</span></span></div>
+                </a></div>
+            </li>
+            <li class="nav-item">
+            <!-- label-->
+            <p class="navbar-vertical-label">Admin Pages</p>
+            <hr class="navbar-vertical-line" /><!-- parent pages-->
+            <div class="nav-item-wrapper"><a class="nav-link label-1" href="{% url 'accounts:login' %}" role="button" data-bs-toggle="" aria-expanded="false">
+                <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="user-check"></span></span><span class="nav-link-text-wrapper"><span class="nav-link-text">Login page</span></span></div>
+                </a></div><!-- parent pages-->
+            <div class="nav-item-wrapper"><a class="nav-link label-1" href="{% url 'accounts:register' %}" role="button" data-bs-toggle="" aria-expanded="false">
+                <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="user-plus"></span></span><span class="nav-link-text-wrapper"><span class="nav-link-text">Register</span></span></div>
+                </a></div><!-- parent pages-->
+            <div class="nav-item-wrapper"><a class="nav-link label-1" href="#" role="button" data-bs-toggle="" aria-expanded="false">
+                <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="users"></span></span><span class="nav-link-text-wrapper"><span class="nav-link-text">All User</span></span></div>
+                </a></div><!-- parent pages-->
+            <div class="nav-item-wrapper"><a class="nav-link label-1" href="#" role="button" data-bs-toggle="" aria-expanded="false">
+                <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="user-minus"></span></span><span class="nav-link-text-wrapper"><span class="nav-link-text">Logout</span></span></div>
+                </a></div><!-- parent pages-->
+            <div class="nav-item-wrapper"><a class="nav-link label-1" href="#" role="button" data-bs-toggle="" aria-expanded="false">
+                <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="settings"></span></span><span class="nav-link-text-wrapper"><span class="nav-link-text">Manage Users</span></span></div>
+                </a></div><!-- parent pages-->
+            <li class="nav-item">
+            <!-- label-->
+        </ul>
+        </div>
+    </div>
+    <div class="navbar-vertical-footer"><button class="btn navbar-vertical-toggle border-0 fw-semibold w-100 white-space-nowrap d-flex align-items-center"><span class="uil uil-left-arrow-to-left fs-8"></span><span class="uil uil-arrow-from-right fs-8"></span><span class="navbar-vertical-footer-text ms-2">Collapsed View</span></button></div>
+{% comment %} </nav> {% endcomment %}

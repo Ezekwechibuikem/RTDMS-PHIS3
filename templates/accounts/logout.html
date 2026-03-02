@@ -1,0 +1,19 @@
+{% extends "account-base.html" %} 
+
+{% load static %}
+
+{% block title %}Logout{% endblock %}
+
+{% block content %}
+<div class="row flex-center min-vh-150 py-5">
+    <div class="col-sm-10 col-md-8 col-lg-5 col-xl-4 col-xxl-3">
+    <div class="text-center mb-3 mx-auto"><img class="mb-7 d-dark-none" src="{% static 'assets/img/logos/LOGO-removebg.png' %}" alt="RTDMS logout logo" style="width: 250px; height: auto;" /><img class="mb-7 d-light-none" src="{% static 'assets/img/logos/LOGO-removebg.png' %}" alt="phoenix" />
+        <div class="mb-6">
+        <h4 class="text-body-highlight">Come back soon!</h4>
+        <p class="text-body-tertiary">Thanks for using our App. <br class="d-lg-none" />You are now successfully signed out.</p>
+        </div>
+        <div class="d-grid"><a class="btn btn-primary" href="{% url 'accounts:login' %}"><span class="fas fa-angle-left me-2"></span>Go to login page</a></div>
+    </div>
+    </div>
+</div>
+{% endblock %}
