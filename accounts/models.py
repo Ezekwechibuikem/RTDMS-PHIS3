@@ -45,6 +45,11 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(max_length=30)
     middle_name = models.CharField(max_length=30, blank=True, null=True)
     image = models.ImageField(upload_to='profiles/', blank=True, null=True)
+    GENDER_CHOICES = (
+        ('MALE', 'Male'),
+        ('FEMALE', 'Female'),
+    )
+    gender = models.CharField(max_length=10, choices=GENDER_CHOICES, blank=True, default='MALE')
 
     ROLE_CHOICES = (
         ('ADMIN', 'Admin'),

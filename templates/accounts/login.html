@@ -1,127 +1,43 @@
-{% extends "base.html" %}
+{% extends "account-base.html" %}
 {% load static %}
-
-{% block title %}Login{% endblock %}
 
 {% block content %}
 
-<main class="main" id="top">
-  <div class="container-fluid bg-body-tertiary dark__bg-gray-1200">
-
-    <div class="bg-holder bg-auth-card-overlay"
-         style="background-image: url('{% static "assets/img/bg/37.png" %}');">
+<div class="row flex-center min-vh-100 py-5">
+  <div class="col-sm-10 col-md-8 col-lg-5 col-xl-5 col-xxl-3"><a class="d-flex flex-center text-decoration-none mb-4"
+      href="{% url 'accounts:login' %}">
+      <div class="d-flex align-items-center fw-bolder fs-3 d-inline-block "><img src="{% static 'assets/img/logos/LOGO-removebg.png' %}"
+          alt="RTDMS login Logo" width="150px" /></div>
+    </a>
+    <div class="text-center mb-7">
+      <h3 class="text-body-highlight">Login</h3>
+      <p class="text-body-tertiary">Get access to your account</p>
     </div>
-
-    <div class="row flex-center position-relative min-vh-100 g-0 py-5">
-      <div class="col-11 col-sm-10 col-xl-8">
-
-        <div class="card border border-translucent auth-card">
-          <div class="card-body pe-md-0">
-
-            <div class="row align-items-center gx-0 gy-7">
-
-              <!-- LEFT PANEL -->
-              <div class="col-auto bg-body-highlight dark__bg-gray-1100 rounded-3 position-relative overflow-hidden auth-title-box">
-
-                <div class="bg-holder"
-                     style="background-image: url('{% static "assets/img/bg/38.png" %}');">
-                </div>
-
-                <div class="position-relative px-4 px-lg-7 pt-7 pb-7 text-center text-md-start">
-                  <h3 class="mb-3 text-body-emphasis fs-7">RTDMS Authentication</h3>
-                  <p class="text-body-tertiary">
-                    Real-Time Duty Management System
-                  </p>
-                </div>
-
-                <div class="position-relative z-n1 mb-6 d-none d-md-block text-center mt-md-15">
-                  <img class="auth-title-box-img d-dark-none"
-                       src="{% static "assets/img/spot-illustrations/auth.png" %}" alt="">
-                  <img class="auth-title-box-img d-light-none"
-                       src="{% static "assets/img/spot-illustrations/auth-dark.png" %}" alt="">
-                </div>
-
-              </div>
-
-              <!-- RIGHT PANEL (LOGIN FORM) -->
-              <div class="col mx-auto">
-                <div class="auth-form-box">
-
-                  <div class="text-center mb-7">
-                    <div class="d-flex flex-center mb-4">
-                      <img src="{% static "assets/img/logos/RTDMS-LOGO.png" %}" 
-                           alt="RTDMS" width="58" />
-                    </div>
-                    <h3 class="text-body-highlight">Sign In</h3>
-                    <p class="text-body-tertiary">Access your account</p>
-                  </div>
-
-                  <!-- LOGIN FORM START -->
-                  <form method="POST">
-                    {% csrf_token %}
-
-                    <!-- Email -->
-                    <div class="mb-3 text-start">
-                      <label class="form-label">Email address</label>
-                      <div class="form-icon-container">
-                        {{ form.username }}
-                        <span class="fas fa-user text-body fs-9 form-icon"></span>
-                      </div>
-                      {% if form.username.errors %}
-                        <div class="text-danger small mt-1">
-                          {{ form.username.errors }}
-                        </div>
-                      {% endif %}
-                    </div>
-
-                    <!-- Password -->
-                    <div class="mb-3 text-start">
-                      <label class="form-label">Password</label>
-                      <div class="form-icon-container">
-                        {{ form.password }}
-                        <span class="fas fa-key text-body fs-9 form-icon"></span>
-                      </div>
-                      {% if form.password.errors %}
-                        <div class="text-danger small mt-1">
-                          {{ form.password.errors }}
-                        </div>
-                      {% endif %}
-                    </div>
-
-                    <div class="row flex-between-center mb-7">
-                      <div class="col-auto">
-                        <div class="form-check mb-0">
-                          <input class="form-check-input" type="checkbox" name="remember">
-                          <label class="form-check-label mb-0">
-                            Remember me
-                          </label>
-                        </div>
-                      </div>
-                      <div class="col-auto">
-                        <a class="fs-9 fw-semibold" href="#">
-                          Forgot Password?
-                        </a>
-                      </div>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary w-100 mb-3">
-                      Sign In
-                    </button>
-
-                  </form>
-                  <!-- LOGIN FORM END -->
-
-                </div>
-              </div>
-
-            </div>
-
+    <div class="position-relative">
+      <hr class="bg-body-secondary mt-5 mb-4" />
+      <div class="divider-content-center">Welcome to RTDMS</div>
+    </div>
+    <form method="POST" autocomplete="off">
+    {% csrf_token %}
+      <div class="mb-3 text-start">
+          <label class="form-label">Email address</label>
+          <div class="form-icon-container">
+              {{ form.username }}
+              <span class="fas fa-user text-body fs-9 form-icon"></span>
           </div>
-        </div>
-
       </div>
-    </div>
+      <div class="mb-3 text-start">
+          <label class="form-label">Password</label>
+          <div class="form-icon-container" data-password="data-password">
+              {{ form.password }}
+              <span class="fas fa-key text-body fs-9 form-icon"></span>
+          </div>
+      </div>
+      <button type="submit" class="btn btn-primary w-100 mb-3">
+          Login
+      </button>
+  </form>
   </div>
-</main>
+</div>
 
 {% endblock %}

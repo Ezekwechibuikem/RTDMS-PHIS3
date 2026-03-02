@@ -1,7 +1,78 @@
-<h2>Register</h2>
+{% extends "account-base.html" %}
+{% load static %}
 
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Register</button>
-</form>
+{% block content %}
+
+    <div class="container">
+        <div class="row flex-center min-vh-100 py-5">
+          <div class="col-sm-10 col-md-8 col-lg-5 col-xl-5 col-xxl-3"><a class="d-flex flex-center text-decoration-none mb-4" href="{% url 'accounts:register' %}">
+              <div class="d-flex align-items-center fw-bolder fs-3 d-inline-block"><img src="{% static 'assets/img/logos/LOGO-removebg.png' %}" alt="Registeration" width="150px" /></div>
+            </a>
+            <div class="text-center mb-7">
+              <h3 class="text-body-highlight">Register</h3>
+              <p class="text-body-tertiary">Create account today</p>
+            <div class="position-relative mt-4">
+            </div>
+            <form method="POST" enctype="multipart/form-data" autocapitalize="off">
+                {% csrf_token %}
+                <div class="mb-3 text-start">
+                    <label class="form-label" for="name">Email address</label>
+                        <div class="form-icon-container">
+                            {{ form.email }}
+                            <span class="text-body fs-9 form-icon"></span>
+                        </div>
+                </div>
+                <div class="row g-3 mb-3">
+                    <div class="col-sm-6"><label class="form-label" for="password">First Name</label>
+                        <div class="form-icon-container">
+                            {{ form.first_name }}
+                            <span class="text-body fs-9 form-icon"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6"><label class="form-label" for="confirmPassword">Last Name</label>
+                        <div class="form-icon-container">
+                            {{ form.last_name }}
+                            <span class="text-body fs-9 form-icon"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6"><label class="form-label" for="password">Gender</label>
+                        <div class="form-icon-container">
+                            {{ form.gender }}
+                            <span class="text-body fs-9 form-icon"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6"><label class="form-label" for="confirmPassword">Role</label>
+                        <div class="form-icon-container">
+                            {{ form.role }}
+                            <span class="text-body fs-9 form-icon"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6"><label class="form-label" for="password">Password</label>
+                        <div class="form-icon-container">
+                            {{ form.password1 }}
+                            <span class="text-body fs-9 form-icon"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6"><label class="form-label" for="confirmPassword">Confirm Password</label>
+                        <div class="form-icon-container">
+                            {{ form.password2 }}
+                            <span class="text-body fs-9 form-icon"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="customFile">Profile Picture</label>
+                     <div class="form-icon-container">
+                        {{ form.image }}
+                        <span class="text-body fs-9 form-icon"></span>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 mt-5 mb-3">
+                    Register
+                </button>
+            </form>
+          </div>
+        </div>
+    </div>
+
+{% endblock %}
