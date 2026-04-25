@@ -40,24 +40,26 @@
             </li>
             <li class="nav-item">
             <!-- label-->
-            <p class="navbar-vertical-label">Admin Pages</p>
-            <hr class="navbar-vertical-line" /><!-- parent pages-->
-            <div class="nav-item-wrapper"><a class="nav-link label-1" href="{% url 'accounts:login' %}" role="button" data-bs-toggle="" aria-expanded="false">
-                <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="user-check"></span></span><span class="nav-link-text-wrapper"><span class="nav-link-text">Login page</span></span></div>
-                </a></div><!-- parent pages-->
-            <div class="nav-item-wrapper"><a class="nav-link label-1" href="{% url 'accounts:register' %}" role="button" data-bs-toggle="" aria-expanded="false">
-                <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="user-plus"></span></span><span class="nav-link-text-wrapper"><span class="nav-link-text">Register</span></span></div>
-                </a></div><!-- parent pages-->
-            <div class="nav-item-wrapper"><a class="nav-link label-1" href="#" role="button" data-bs-toggle="" aria-expanded="false">
-                <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="users"></span></span><span class="nav-link-text-wrapper"><span class="nav-link-text">All User</span></span></div>
-                </a></div><!-- parent pages-->
-            <div class="nav-item-wrapper"><a class="nav-link label-1" href="#" role="button" data-bs-toggle="" aria-expanded="false">
-                <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="user-minus"></span></span><span class="nav-link-text-wrapper"><span class="nav-link-text">Logout</span></span></div>
-                </a></div><!-- parent pages-->
-            <div class="nav-item-wrapper"><a class="nav-link label-1" href="#" role="button" data-bs-toggle="" aria-expanded="false">
-                <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="settings"></span></span><span class="nav-link-text-wrapper"><span class="nav-link-text">Manage Users</span></span></div>
-                </a></div><!-- parent pages-->
-            <li class="nav-item">
+            {% if user.is_admin %}
+                <p class="navbar-vertical-label">Admin Panel</p>
+                <hr class="navbar-vertical-line" /><!-- parent pages-->
+                <div class="nav-item-wrapper"><a class="nav-link label-1" href="{% url 'accounts:login' %}" role="button" data-bs-toggle="" aria-expanded="false">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="user-check"></span></span><span class="nav-link-text-wrapper"><span class="nav-link-text">Login page</span></span></div>
+                    </a></div><!-- parent pages-->
+                <div class="nav-item-wrapper"><a class="nav-link label-1" href="{% url 'accounts:register' %}" role="button" data-bs-toggle="" aria-expanded="false">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="user-plus"></span></span><span class="nav-link-text-wrapper"><span class="nav-link-text">Register</span></span></div>
+                    </a></div><!-- parent pages-->
+                <div class="nav-item-wrapper"><a class="nav-link label-1" href="#" role="button" data-bs-toggle="" aria-expanded="false">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="users"></span></span><span class="nav-link-text-wrapper"><span class="nav-link-text">All User</span></span></div>
+                    </a></div><!-- parent pages-->
+                <div class="nav-item-wrapper"><a class="nav-link label-1" href="#" role="button" data-bs-toggle="" aria-expanded="false">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="user-minus"></span></span><span class="nav-link-text-wrapper"><span class="nav-link-text">Logout</span></span></div>
+                    </a></div><!-- parent pages-->
+                <div class="nav-item-wrapper"><a class="nav-link label-1" href="#" role="button" data-bs-toggle="" aria-expanded="false">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="settings"></span></span><span class="nav-link-text-wrapper"><span class="nav-link-text">Manage Users</span></span></div>
+                    </a></div><!-- parent pages-->
+                <li class="nav-item">
+            {% endif %}
             <!-- label-->
         </ul>
         </div>

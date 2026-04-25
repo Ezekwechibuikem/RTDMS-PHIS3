@@ -88,6 +88,7 @@ class CustomUserCreationForm(forms.ModelForm):
             'first_name',
             'last_name',
             'middle_name',
+            'gender',
             'role',
             'image',
         )

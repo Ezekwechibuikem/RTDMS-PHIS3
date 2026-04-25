@@ -18,6 +18,7 @@ def register(request):
 
             messages.success(request, "Registration successful. Please login.")
             return redirect('accounts:login')
+        messages.error(request, "Unsuccessful registration. Invalid information.")
     else:
         form = CustomUserCreationForm()
 

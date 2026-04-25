@@ -19,6 +19,19 @@
     </div>
     <form method="POST" autocomplete="off">
     {% csrf_token %}
+    {% if form.errors %}
+        <div style="background-color:#e0e0e0; color:#333; border:1px solid #bdbdbd; padding:10px; border-radius:5px;">
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <div>{{ error }}</div>
+                {% endfor %}
+            {% endfor %}
+
+            {% for error in form.non_field_errors %}
+                <div>{{ error }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
       <div class="mb-3 text-start">
           <label class="form-label">Email address</label>
           <div class="form-icon-container">
@@ -41,3 +54,18 @@
 </div>
 
 {% endblock %}
+
+
+
+<!-- {% if form.errors %}
+    <div style="background-color:#e0e0e0; color:#333; border:1px solid #bdbdbd; padding:10px; border-radius:5px;">
+        {% for field in form %}
+            {% for error in field.errors %}
+                <div>{{ error }}</div>
+            {% endfor %}
+        {% endfor %}
+        {% for error in form.non_field_errors %}
+            <div>{{ error }}</div>
+        {% endfor %}
+    </div>
+{% endif %} -->
