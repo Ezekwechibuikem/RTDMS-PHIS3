@@ -56,6 +56,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         ('DEPT_HEAD', 'Department Head'),
         ('UNIT_HEAD', 'Unit Head'),
         ('SUPERVISOR', 'Supervisor'),
+        ('HR', 'HR'),
         ('STAFF', 'Staff'),
     )
     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='STAFF')
@@ -87,3 +88,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def is_staff_member(self):
         return self.role == 'STAFF'
+
+    def is_hr(self):
+        return self.role == 'HR'

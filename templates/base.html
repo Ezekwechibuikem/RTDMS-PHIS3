@@ -198,5 +198,12 @@
     <script src="{% static 'assets/js/phoenix.js' %}"></script> 
     <script src="{% static 'vendors/echarts/echarts.min.js' %}"></script>
     <script src="{% static 'assets/js/dashboards/ecommerce-dashboard.js' %}"></script>
+
+    {% if user.is_authenticated %}
+      <script>
+        window.IDLE_LOGIN_URL = "{% url 'accounts:login' %}";
+      </script>
+      <script src="{% static 'assets/js/idle_timeout.js' %}"></script>
+    {% endif %}
   </body>
 </html>

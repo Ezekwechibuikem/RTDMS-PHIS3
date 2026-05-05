@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     # 'api',
     'dashboards',
     'accounts',
+    'accounts_profiles',
 ]
 
 MIDDLEWARE = [
@@ -130,3 +131,7 @@ STATICFILES_DIRS = [
 LOGIN_URL = 'accounts:login'
 LOGIN_REDIRECT_URL = 'dashboards:dashboard'
 LOGOUT_REDIRECT_URL = 'accounts:login'
+
+SESSION_COOKIE_AGE = 300
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_SAVE_EVERY_REQUEST = True
