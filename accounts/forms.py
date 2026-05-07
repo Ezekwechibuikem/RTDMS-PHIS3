@@ -149,3 +149,63 @@ class CustomAuthenticationForm(AuthenticationForm):
             'autocomplete': 'off'
         })
     )
+
+class ForgotPasswordForm(forms.Form):
+    """Form for users to request a password reset via email."""
+    email = forms.EmailField(
+        widget=forms.EmailInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Enter your email'
+        })
+    )
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if not User.objects.filter(email=email).exists():
+            raise forms.ValidationError("No user is associated with this email address.")
+        return email
+
+class OTPVerificationForm(forms.Form):
+    """Form for users to enter the OTP sent to their email."""
+    otp = forms.CharField(
+        max_length=6,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Enter OTP'
+        })
+    )
+
+    def clean_otp(self):
+        otp = self.cleaned_data.get('otp')
+        if not otp.isdigit() or len(otp) != 6:
+            raise forms.ValidationError("Invalid OTP format. OTP must be a 6-digit number.")
+        return otp
+    
+class ResetPasswordForm(forms.Form):
+    """Form for users to reset their password after OTP verification."""
+    password1 = forms.CharField(
+        label="New Password",
+        widget=forms.PasswordInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'New Password'
+        })
+    )
+
+    password2 = forms.CharField(
+        label="Confirm Password",
+        widget=forms.PasswordInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Confirm Password'
+        })
+    )
+
+    def clean(self):
+        cleaned_data = super().clean()
+
+        password1 = cleaned_data.get('password1')
+        password2 = cleaned_data.get('password2')
+
+        if password1 != password2:
+            raise forms.ValidationError("Passwords do not match.")
+
+        return cleaned_data
