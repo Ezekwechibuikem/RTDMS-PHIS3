@@ -87,3 +87,14 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def is_staff_member(self):
         return self.role == 'STAFF'
+
+class PasswordResetOTP(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    otp = models.CharField(max_length=6)
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_used = models.BooleanField(default=False)
+
+    def is_valid(self):
+        from django.utils import timezone
+        time_difference = timezone.now() - self.created_at
+        return not self.is_used and time_difference.total_seconds() <= 600
