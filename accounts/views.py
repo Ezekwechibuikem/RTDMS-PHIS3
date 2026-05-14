@@ -50,17 +50,29 @@ def logout_view(request):
     return render(request, 'accounts/logout.html')
 
 def forgot_password(request):
+
     if request.method == 'POST':
+
         form = ForgotPasswordForm(request.POST)
+
         if form.is_valid():
+
             email = form.cleaned_data['email']
+
             try:
                 user = CustomUser.objects.get(email=email)
 
-                PasswordResetOTP.objects.filter(user=user, is_used=False).delete()
+                PasswordResetOTP.objects.filter(
+                    user=user,
+                    is_used=False
+                ).delete()
+
                 otp = PasswordResetOTP.generate_otp()
 
-                PasswordResetOTP.objects.create(user=user, otp=otp) 
+                PasswordResetOTP.objects.create(
+                    user=user,
+                    otp=otp
+                )
 
                 send_mail(
                     'Password Reset OTP',
@@ -69,17 +81,31 @@ def forgot_password(request):
                     [user.email],
                     fail_silently=False,
                 )
+
                 request.session['reset_email'] = user.email
-                messages.success(request, "An OTP has been sent to your email address.")
+
+                messages.success(
+                    request,
+                    "An OTP has been sent to your email address."
+                )
+
                 return redirect('accounts:verify_otp')
-            
+
             except CustomUser.DoesNotExist:
-                messages.error(request, "No user is associated with this email address.")
-                return render(request, 'accounts/forgot_password.html', {'form': form})
-            
-        else:
-            form = ForgotPasswordForm()
-            return render(request, 'accounts/forgot_password.html', {'form': form})
+
+                messages.error(
+                    request,
+                    "No user is associated with this email address."
+                )
+
+    else:
+        form = ForgotPasswordForm()
+
+    return render(
+        request,
+        'accounts/forgot_password.html',
+        {'form': form}
+    )
 
 def verify_otp(request):
     email = request.session.get('reset_email')
@@ -113,31 +139,44 @@ def verify_otp(request):
     return render(request, 'accounts/verify_otp.html', {'form': form})
 
 def reset_password(request):
-    email = request.session.get('reset_email')
-    verified = request.session.get('otp_verified', False)
-    if not email or not verified:
-        messages.error(request, "Unauthorized access. Please start the password reset process again.")
-        return redirect('accounts:forgot_password')
+
+    form = ResetPasswordForm()
+
     if request.method == 'POST':
+
         form = ResetPasswordForm(request.POST)
+
         if form.is_valid():
+
             password = form.cleaned_data['password1']
-            try:
+            confirm_password = form.cleaned_data['password2']
+
+            if password == confirm_password:
+
+                email = request.session.get('reset_email')
+
                 user = CustomUser.objects.get(email=email)
+
                 user.set_password(password)
+
                 user.save()
 
-                request.session.flush()
+                messages.success(
+                    request,
+                    'Password reset successful.'
+                )
 
-                messages.success(request, "Your password has been reset successfully. Please login.")
-                request.session.pop('reset_email', None)
-                request.session.pop('otp_verified', None)
                 return redirect('accounts:login')
-            
-            except CustomUser.DoesNotExist:
-                messages.error(request, "No user is associated with this email address.")
-                return redirect('accounts:forgot_password')
-            
-        else:
-            form = ResetPasswordForm()
-            return render(request, 'accounts/reset_password.html', {'form': form})
+
+            else:
+
+                messages.error(
+                    request,
+                    'Passwords do not match.'
+                )
+
+    return render(
+        request,
+        'accounts/reset_password.html',
+        {'form': form}
+    )
