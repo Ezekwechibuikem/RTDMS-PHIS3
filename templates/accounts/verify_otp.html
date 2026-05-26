@@ -1,26 +1,63 @@
 {% extends "account-base.html" %}
+{% load static %}
 
 {% block content %}
 
-<div class="container mt-5">
+<div class="row flex-center min-vh-100 py-5">
 
-    <div class="row justify-content-center">
+    <div class="col-sm-10 col-md-8 col-lg-5 col-xxl-4">
 
-        <div class="col-md-4">
+        <a class="d-flex flex-center text-decoration-none mb-4" href="#">
+            <div class="d-flex align-items-center fw-bolder fs-3 d-inline-block">
+                <img src="{% static 'assets/img/logos/LOGO-removebg.png' %}"
+                     alt="RTDMS Login logo"
+                     width="80" />
+            </div>
+        </a>
 
-            <h3>Verify OTP</h3>
+        <div class="px-xxl-5">
 
-            <form method="POST">
+            <div class="text-center mb-6">
 
-                {% csrf_token %}
+                <h4 class="text-body-highlight">
+                    Enter the verification code
+                </h4>
 
-                {{ form.as_p }}
+                <p class="text-body-tertiary mb-4">
+                    A 6-digit OTP has been sent to your email address.
+                </p>
 
-                <button type="submit" class="btn btn-primary w-100">
-                    Verify OTP
-                </button>
+                <form method="POST" autocomplete="off">
 
-            </form>
+                    {% csrf_token %}
+
+                    <div class="mb-4">
+                        {{ form.otp }}
+                    </div>
+
+                    {% if form.errors %}
+                        <div class="alert alert-danger py-2">
+                            {{ form.otp.errors }}
+                        </div>
+                    {% endif %}
+
+                    <button class="btn btn-primary w-100 mb-4"
+                            type="submit">
+
+                        Verify OTP
+
+                    </button>
+
+                    <a class="fs-9"
+                       href="{% url 'accounts:forgot_password' %}">
+
+                        Didn’t receive the code?
+
+                    </a>
+
+                </form>
+
+            </div>
 
         </div>
 
