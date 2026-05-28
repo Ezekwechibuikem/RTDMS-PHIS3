@@ -82,9 +82,22 @@
                         <span class="text-body fs-9 form-icon"></span>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary w-100 mt-5 mb-3">
+                <!-- <button type="submit" class="btn btn-primary w-100 mt-5 mb-3">
                     Register
-                </button>
+                </button> -->
+                <div class="d-flex mt-5 mb-3">
+                    {% if user.is_admin %}
+                    <a href="{% url 'accounts:login' %}" class="btn btn-secondary">
+                        ← Back
+                    </a>
+                    {% endif %}
+
+                    <div class="ms-auto">
+                        <button type="submit" class="btn btn-primary">
+                            Register
+                        </button>
+                    </div>
+                </div>
             </form>
           </div>
         </div>

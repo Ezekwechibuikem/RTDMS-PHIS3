@@ -58,6 +58,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         ('DEPT_HEAD', 'Department Head'),
         ('UNIT_HEAD', 'Unit Head'),
         ('SUPERVISOR', 'Supervisor'),
+        ('HR', 'HR'),
         ('STAFF', 'Staff'),
     )
     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='STAFF')
@@ -90,6 +91,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     def is_staff_member(self):
         return self.role == 'STAFF'
 
+<<<<<<< HEAD
 class PasswordResetOTP(models.Model):
     user = models.ForeignKey('CustomUser', on_delete=models.CASCADE)
     otp = models.CharField(max_length=6)
@@ -105,3 +107,7 @@ class PasswordResetOTP(models.Model):
 
     def __str__(self):
         return f"{self.user.email} - {self.otp}"
+=======
+    def is_hr(self):
+        return self.role == 'HR'
+>>>>>>> profiles
