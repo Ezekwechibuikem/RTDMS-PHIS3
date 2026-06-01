@@ -87,11 +87,13 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def is_supervisor(self):
         return self.role == 'SUPERVISOR'
+    
+    def is_hr(self):
+        return self.role == 'HR'
 
     def is_staff_member(self):
         return self.role == 'STAFF'
 
-<<<<<<< HEAD
 class PasswordResetOTP(models.Model):
     user = models.ForeignKey('CustomUser', on_delete=models.CASCADE)
     otp = models.CharField(max_length=6)
@@ -107,7 +109,4 @@ class PasswordResetOTP(models.Model):
 
     def __str__(self):
         return f"{self.user.email} - {self.otp}"
-=======
-    def is_hr(self):
-        return self.role == 'HR'
->>>>>>> profiles
+    
