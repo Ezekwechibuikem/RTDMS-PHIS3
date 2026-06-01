@@ -3,6 +3,8 @@ from django.contrib.auth.models import (
     AbstractBaseUser, PermissionsMixin, BaseUserManager
 )
 from django.utils import timezone
+from datetime import timedelta
+import secrets
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, first_name, last_name, password=None, **extra_fields):
@@ -91,3 +93,19 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def is_hr(self):
         return self.role == 'HR'
+
+class PasswordResetOTP(models.Model):
+    user = models.ForeignKey('CustomUser', on_delete=models.CASCADE)
+    otp = models.CharField(max_length=6)
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_used = models.BooleanField(default=False)
+
+    def is_expired(self):
+        return timezone.now() > self.created_at + timedelta(minutes=10)
+
+    @staticmethod
+    def generate_otp():
+        return ''.join([str(secrets.randbelow(10)) for _ in range(6)])
+
+    def __str__(self):
+        return f"{self.user.email} - {self.otp}"
