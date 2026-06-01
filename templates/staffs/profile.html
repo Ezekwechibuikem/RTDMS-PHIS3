@@ -1,78 +1,127 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 
-<div class="content">
-  <!-- <nav class="mb-3" aria-label="breadcrumb">
-    <ol class="breadcrumb mb-0">
-      <li class="breadcrumb-item"><a href="#!">Page 1</a></li>
-      <li class="breadcrumb-item"><a href="#!">Page 2</a></li>
-      <li class="breadcrumb-item active">Default</li>
-    </ol>
-  </nav> -->
-  <div class="mb-9">
-    <div class="row align-items-center justify-content-between g-3 mb-4">
-      <div class="col-auto">
-        <h2 class="mb-0">Customer details</h2>
-      </div>
-      <div class="col-auto">
-        <div class="row g-3">
-          <div class="col-auto"><button class="btn btn-phoenix-danger"><span class="fa-solid fa-trash-can me-2"></span>Delete customer</button></div>
-          <div class="col-auto"><button class="btn btn-phoenix-secondary"><span class="fas fa-key me-2"></span>Reset password</button></div>
-        </div>
-      </div>
-    </div>
-    <div class="row g-5">
-      <div class="col-12 col-xxl-4">
-        <div class="row g-3 h-100">
-          <div class="col-12 col-md-7 col-xxl-12">
-            <div class="card h-100 h-xxl-auto">
-              <div class="card-body d-flex flex-column justify-content-between pb-3">
-                <div class="row align-items-center g-5 mb-3 text-center text-sm-start">
-                  <div class="col-12 col-sm-auto mb-sm-2">
-                    <div class="avatar avatar-5xl"><img class="rounded-circle" src="../../../assets/img/team/15.webp" alt="" /></div>
+ <section class="pt-5 pb-9">
+        <div class="container-small">
+          <div class="row align-items-center justify-content-between g-3 mb-4">
+            <div class="col-auto">
+              <h2 class="mb-0">Profile</h2>
+            </div>
+            <div class="col-auto">
+              <div class="row g-2 g-sm-3">
+                {% if user.is_admin %}
+                  <div class="col-auto"><button class="btn btn-phoenix-danger"><span class="fas fa-trash-alt me-2"></span>Delete customer</button></div>
+                {% endif %}
+                <div class="col-auto"><button class="btn btn-phoenix-secondary"><span class="fas fa-key me-2"></span>Reset password</button></div>
+              </div>
+            </div>
+          </div>
+          <div class="row g-3 mb-6">
+            <div class="col-12 col-lg-8">
+              <div class="card h-100">
+                <div class="card-body">
+                  <div class="border-bottom border-dashed pb-4">
+                    <div class="row align-items-center g-3 g-sm-5 text-center text-sm-start">
+    
+                      <div class="col-12 col-sm-auto">
+                        <input class="d-none" id="avatarFile" type="file" />
+                        <label class="cursor-pointer avatar avatar-5xl" for="avatarFile">
+                          {% if user.image %}
+                            <img class="rounded-circle" class="rounded-circle"
+                                src="{{ user.image.url }}"
+                                alt="Profile">
+                          {% else %}
+                              {% if user.gender == "FEMALE" %}
+                                  <img class="rounded-circle"
+                                      src="{% static 'assets/img/display-pic/female_avatar.png' %}"
+                                      alt="Female Default Avatar"
+                                      >
+                              {% else %}
+                                  <img class="rounded-circle"
+                                      src="{% static 'assets/img/display-pic/male_avatar.png' %}"
+                                      alt="Male Default Avatar"
+                                      >
+                              {% endif %}
+                          {% endif %}
+                        </label>
+                      </div>
+                      <div class="col-12 col-sm-auto flex-1">
+                        <h3>{{ user.first_name }} {{ user.last_name }}</h3>
+                        <p class="text-body-secondary">{{ user.date_joined|date:"F d, Y" }}</p>
+                        <div><a class="me-2" href="#!"><span class="fab fa-linkedin-in text-body-quaternary text-opacity-75 text-primary-hover"></span></a><a class="me-2" href="#!"><span class="fab fa-facebook text-body-quaternary text-opacity-75 text-primary-hover"></span></a><a href="#!"><span class="fab fa-twitter text-body-quaternary text-opacity-75 text-primary-hover"></span></a></div>
+                      </div>
+                    </div>
                   </div>
-                  <div class="col-12 col-sm-auto flex-1">
-                    <h3>Ansolo Lazinatov</h3>
-                    <p class="text-body-secondary">Joined 3 months ago</p>
-                    <div><a class="me-2" href="#!"><span class="fab fa-linkedin-in text-body-quaternary text-opacity-75 text-primary-hover"></span></a><a class="me-2" href="#!"><span class="fab fa-facebook text-body-quaternary text-opacity-75 text-primary-hover"></span></a><a href="#!"><span class="fab fa-twitter text-body-quaternary text-opacity-75 text-primary-hover"></span></a></div>
+                  <div class="d-flex flex-between-center pt-4">
+                    <div>
+                      <h4 class="mb-2 text-body-secondary">Staff Role</h4>
+                      <h4 class="fs-7 text-body-highlight mb-0">{{ user.get_role_display }}</h4>
+                    </div>
+                    <div class="text-end">
+                      <h4 class="mb-2 text-body-secondary">Leave Balance</h4>
+                      <h4 class="fs-7 text-body-highlight mb-0">{{ profile.leave_balance }}</h4>
+                    </div>
+                    <div class="text-end">
+                      <h4 class="mb-2 text-body-secondary">Last Increment</h4>
+                      <h4 class="fs-7 text-body-highlight mb-0">{{ profile.last_incremented|date:"F d, Y" }}</h4>
+                    </div>
                   </div>
                 </div>
-                <div class="d-flex flex-between-center border-top border-dashed pt-4">
-                  <div>
-                    <h6>Following</h6>
-                    <p class="fs-7 text-body-secondary mb-0">297</p>
+              </div>
+            </div>
+            <div class="col-12 col-lg-4">
+              <div class="card h-100">
+                <div class="card-body">
+                  <div class="border-bottom border-dashed">
+                    <h4 class="mb-3">Default Address<button class="btn btn-link p-0" type="button"> <span class="fas fa-edit fs-9 ms-3 text-body-quaternary"></span></button></h4>
                   </div>
-                  <div>
-                    <h6>Projects</h6>
-                    <p class="fs-7 text-body-secondary mb-0">56</p>
+                  <div class="pt-4 mb-7 mb-lg-4 mb-xl-7">
+                    <div class="row justify-content-between">
+                      <div class="col-auto">
+                        <h5 class="text-body-highlight">Address</h5>
+                      </div>
+                      <div class="col-auto">
+                        <p class="text-body-secondary">Vancouver, British Columbia<br />Canada</p>
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <h6>Completion</h6>
-                    <p class="fs-7 text-body-secondary mb-0">97</p>
+                  <div class="border-top border-dashed pt-4">
+                    <div class="row flex-between-center mb-2">
+                      <div class="col-auto">
+                        <h5 class="text-body-highlight mb-0">Email</h5>
+                      </div>
+                      <div class="col-auto"><a class="lh-1" href="mailto:{% if user.email %}{{ user.email }}{% endif %}">{% if user.email %}{{ user.email }}{% endif %}</a></div>
+                    </div>
+                    <div class="row flex-between-center">
+                      <div class="col-auto">
+                        <h5 class="text-body-highlight mb-0">Gender</h5>
+                      </div>
+                      <div class="col-auto">
+                        <p class="text-body-secondary">
+                          {{ user.gender }}
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-12 col-md-5 col-xxl-12">
-            <div class="card">
-              <div class="card-body">
-                <div class="d-flex align-items-center mb-3">
-                  <h3 class="me-1">Default Address</h3><button class="btn btn-link p-0"><span class="fas fa-pen fs-8 ms-3 text-body-quaternary"></span></button>
-                </div>
-                <h5 class="text-body-secondary">Address</h5>
-                <p class="text-body-secondary">Shatinon Mekalan<br />Vancouver, British Columbia<br />Canada</p>
-                <div class="mb-3">
-                  <h5 class="text-body-secondary">Email</h5><a href="mailto:shatinon@jeemail.com">shatinon@jeemail.com</a>
-                </div>
-                <h5 class="text-body-secondary">Phone</h5><a class="text-body-secondary" href="tel:+1234567890">+1234567890</a>
-              </div>
+          <div>
+            <div class="scrollbar">
+              <ul class="nav nav-underline fs-9 flex-nowrap mb-3 pb-1" id="myTab" role="tablist">
+                <li class="nav-item me-3"><a class="nav-link text-nowrap active" id="orders-tab" data-bs-toggle="tab" href="#tab-orders" role="tab" aria-controls="tab-orders" aria-selected="true"><span class="fas fa-shopping-cart me-2"></span>Orders <span class="text-body-tertiary fw-normal"> (35)</span></a></li>
+                <li class="nav-item me-3"><a class="nav-link text-nowrap" id="reviews-tab" data-bs-toggle="tab" href="#tab-reviews" role="tab" aria-controls="tab-orders" aria-selected="true"><span class="fas fa-star me-2"></span>Reviews<span class="text-body-tertiary fw-normal"> (24)</span></a></li>
+                <li class="nav-item me-3"><a class="nav-link text-nowrap" id="wishlist-tab" data-bs-toggle="tab" href="#tab-wishlist" role="tab" aria-controls="tab-orders" aria-selected="true"><span class="fas fa-heart me-2"></span>Wishlist</a></li>
+                <li class="nav-item me-3"><a class="nav-link text-nowrap" id="stores-tab" data-bs-toggle="tab" href="#tab-stores" role="tab" aria-controls="tab-stores" aria-selected="true"><span class="fas fa-home me-2"></span>Stores</a></li>
+                <li class="nav-item"><a class="nav-link text-nowrap" id="personal-info-tab" data-bs-toggle="tab" href="#tab-personal-info" role="tab" aria-controls="tab-personal-info" aria-selected="true"><span class="fas fa-user me-2"></span>Personal info</a></li>
+              </ul>
             </div>
+           
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+        </div><!-- end of .container-->
+      </section><!-- <section> close ============================-->
+      <!-- ============================================-->
 {% endblock %}

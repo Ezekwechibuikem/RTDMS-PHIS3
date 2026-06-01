@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 'rest_framework',
     # 'api',
+    'django_apscheduler',
     'dashboards',
     'accounts',
     'accounts_profiles',
@@ -48,6 +49,9 @@ MIDDLEWARE = [
 #         'rest_framework_simplejwt.authentication.JWTAuthentication',
 #     ),
 # }
+
+APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
+APSCHEDULER_RUN_NOW_TIMEOUT = 25
 
 
 ROOT_URLCONF = 'config.urls'
