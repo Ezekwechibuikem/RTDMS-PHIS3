@@ -23,14 +23,20 @@ class UserProfile(models.Model):
 
     def apply_increment(self):
         today = timezone.now().date()
+        joined = self.user.date_joined.date()
+
         if self.last_incremented:
             if (self.last_incremented.year == today.year and
                     self.last_incremented.month == today.month):
                 return
-        self.leave_balance += self.get_monthly_increment()
+
+        months_elapsed = max(
+            (today.year - joined.year) * 12 + (today.month - joined.month), 0
+        )
+        self.leave_balance = months_elapsed * self.get_monthly_increment()
         self.last_incremented = today
         self.save()
-
+        
     @property
     def calculated_leave_balance(self):
         now = timezone.now()

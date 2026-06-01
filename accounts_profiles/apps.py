@@ -6,3 +6,6 @@ class AccountsProfilesConfig(AppConfig):
 
     def ready(self):
         import accounts_profiles.models
+
+        from accounts_profiles.scheduler import start
+        start()
