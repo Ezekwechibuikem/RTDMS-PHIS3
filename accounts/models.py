@@ -94,6 +94,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     def is_staff_member(self):
         return self.role == 'STAFF'
 
+    def is_hr(self):
+        return self.role == 'HR'
+
 class PasswordResetOTP(models.Model):
     user = models.ForeignKey('CustomUser', on_delete=models.CASCADE)
     otp = models.CharField(max_length=6)
