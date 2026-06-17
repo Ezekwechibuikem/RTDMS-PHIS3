@@ -148,7 +148,7 @@ class CustomAuthenticationForm(AuthenticationForm):
             'class': 'form-control form-icon-input pe-6',
             'placeholder': 'Password',
             'autocomplete': 'off',
-            'id': 'id_password'
+            'id': 'id_password1'
         })
     )
 
@@ -190,7 +190,7 @@ class ResetPasswordForm(forms.Form):
         widget=forms.PasswordInput(attrs={
             'class': 'form-control',
             'placeholder': 'New Password',
-             'id': 'id_new_password'
+             'id': 'id_password1'
         })
     )
 
@@ -199,7 +199,7 @@ class ResetPasswordForm(forms.Form):
         widget=forms.PasswordInput(attrs={
             'class': 'form-control',
             'placeholder': 'Confirm Password',
-             'id': 'id_confirm_password'
+             'id': 'id_password2'
         })
     )
 

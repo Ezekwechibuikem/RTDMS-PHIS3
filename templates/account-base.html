@@ -91,33 +91,35 @@
     <script>
       document.addEventListener('DOMContentLoaded', function () {
 
-          const passwordInput = document.getElementById('id_password');
-          const toggleButton = document.getElementById('togglePassword');
-          const toggleIcon = document.getElementById('toggleIcon');
+          const toggleButtons = document.querySelectorAll('.toggle-password');
 
-          if (passwordInput && toggleButton) {
+          toggleButtons.forEach(button => {
 
-              toggleButton.addEventListener('click', function () {
+              button.addEventListener('click', function () {
 
-                  if (passwordInput.type === 'password') {
+                  const targetId = this.dataset.target;
+                  const passwordField = document.getElementById(targetId);
+                  const icon = this.querySelector('span');
 
-                      passwordInput.type = 'text';
+                  if (passwordField.type === 'password') {
 
-                      toggleIcon.classList.remove('uil-eye');
-                      toggleIcon.classList.add('uil-eye-slash');
+                      passwordField.type = 'text';
+
+                      icon.classList.remove('uil-eye');
+                      icon.classList.add('uil-eye-slash');
 
                   } else {
 
-                      passwordInput.type = 'password';
+                      passwordField.type = 'password';
 
-                      toggleIcon.classList.remove('uil-eye-slash');
-                      toggleIcon.classList.add('uil-eye');
+                      icon.classList.remove('uil-eye-slash');
+                      icon.classList.add('uil-eye');
 
                   }
 
               });
 
-          }
+          });
 
       });
     </script>
