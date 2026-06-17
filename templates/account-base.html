@@ -87,5 +87,39 @@
       </script>
       <script src="{% static 'assets/js/idle_timeout.js' %}"></script>
     {% endif %}
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+
+          const passwordInput = document.getElementById('id_password');
+          const toggleButton = document.getElementById('togglePassword');
+          const toggleIcon = document.getElementById('toggleIcon');
+
+          if (passwordInput && toggleButton) {
+
+              toggleButton.addEventListener('click', function () {
+
+                  if (passwordInput.type === 'password') {
+
+                      passwordInput.type = 'text';
+
+                      toggleIcon.classList.remove('uil-eye');
+                      toggleIcon.classList.add('uil-eye-slash');
+
+                  } else {
+
+                      passwordInput.type = 'password';
+
+                      toggleIcon.classList.remove('uil-eye-slash');
+                      toggleIcon.classList.add('uil-eye');
+
+                  }
+
+              });
+
+          }
+
+      });
+    </script>
   </body>
 </html>

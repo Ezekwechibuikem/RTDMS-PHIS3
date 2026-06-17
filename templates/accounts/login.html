@@ -40,15 +40,32 @@
           </div>
       </div>
       <div class="mb-3 text-start">
-          <label class="form-label">Password</label>
-          <div class="form-icon-container" data-password="data-password">
-              {{ form.password }}
-              <span class="fas fa-key text-body fs-9 form-icon"></span>
-          </div>
-      </div>
-      <button type="submit" class="btn btn-primary w-100 mb-3">
-          Login
-      </button>
+    <label class="form-label">Password</label>
+
+    <div class="form-icon-container position-relative">
+        {{ form.password }}
+
+        <span class="fas fa-key text-body fs-9 form-icon"></span>
+
+        <button
+            type="button"
+            id="togglePassword"
+            class="btn px-3 py-0 h-100 position-absolute top-0 end-0 fs-7 text-body-tertiary border-0 bg-transparent">
+
+            <span id="toggleIcon" class="uil uil-eye"></span>
+
+        </button>
+    </div>
+
+    <div class="text-end mt-2">
+        <a href="{% url 'accounts:forgot_password' %}"
+           class="fs-9 fw-semibold text-decoration-none">
+            Forgot Password?
+        </a>
+    </div>
+      <div class="mb-3">
+        <button type="submit" class="btn btn-primary d-grid w-100">Log in</button>
+      </div>    
   </form>
   </div>
 </div>
