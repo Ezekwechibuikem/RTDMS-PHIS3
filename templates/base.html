@@ -27,7 +27,8 @@
         phoenixNavbarTopStyle: 'default'
       });
     </script>
-
+    
+    <link href="{% static 'vendors/prism/prism-okaidia.css' %}" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap" rel="stylesheet">
@@ -236,6 +237,19 @@
               });
 
           }
+
+      });
+    </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+
+        const options = {
+          valueNames: ['email', 'gender', 'role'],
+          page: 5,
+          pagination: true
+        };
+
+        new List('tableExample3', options);
 
       });
     </script>

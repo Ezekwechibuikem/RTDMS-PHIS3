@@ -1,3 +1,5 @@
+from urllib import request
+
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from django.conf import settings
@@ -6,15 +8,15 @@ from django.utils import timezone
 from django.contrib import messages
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import authenticate
+from django.contrib.auth.decorators import login_required
 
 from .models import *
 from .forms import CustomUserCreationForm, CustomAuthenticationForm, ForgotPasswordForm, ResetPasswordForm, OTPVerificationForm
 from django.contrib.auth import login, logout
 
 
-
-
 def register(request):
+   
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST, request.FILES)
         if form.is_valid():
@@ -33,6 +35,7 @@ def register(request):
     return render(request, 'accounts/register.html', {'form': form})
 
 from accounts_profiles.models import UserProfile
+
 
 def login_view(request):
     if request.user.is_authenticated:
@@ -190,3 +193,11 @@ def reset_password(request):
         'accounts/reset_password.html',
         {'form': form}
     )
+
+# @login_required
+# def all_users(request):
+#     users = CustomUser.objects.all().order_by('-date_joined')
+#     context = {
+#         'users': users,
+#     }
+#     return render(request, 'staffs/all_users.html', context)
