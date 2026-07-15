@@ -1,3 +1,5 @@
+import os 
+import threading
 from django.apps import AppConfig
 
 class AccountsProfilesConfig(AppConfig):
@@ -5,7 +7,13 @@ class AccountsProfilesConfig(AppConfig):
     name = 'accounts_profiles'
 
     def ready(self):
-        import accounts_profiles.models
+        # Prevents duplicate execution caused by Django's autoreload feature
+        if os.environ.get('RUN_MAIN') != 'true':
+            return
+        
+        # Start the background thread for the periodic task
+        from accounts_profiles.scheduler import start 
 
-        from accounts_profiles.scheduler import start
-        start()
+        thread = threading.Thread(target=start)
+        thread.daemon = True  # Ensure the thread exits when the main program does
+        thread.start()

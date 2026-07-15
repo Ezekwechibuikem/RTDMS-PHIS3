@@ -5,6 +5,7 @@ from django_apscheduler.models import DjangoJobExecution
 from django_apscheduler import util
 from accounts_profiles.models import UserProfile
 import logging
+import time
 
 logger = logging.getLogger(__name__)
 
@@ -24,24 +25,21 @@ def delete_old_job_executions(max_age=604_800):
 
 
 def start():
+
+    # Wait until Django has finished starting
+    time.sleep(5)
+
+    # Synchronize leave balances once
+    run_leave_increment_job()
+
     scheduler = BackgroundScheduler()
-    scheduler.add_jobstore(DjangoJobStore(), 'default')
+    scheduler.add_jobstore(DjangoJobStore(), "default")
 
     scheduler.add_job(
         run_leave_increment_job,
         trigger=CronTrigger(day=1, hour=0, minute=0),
-        id='run_leave_increment',
-        max_instances=1,
-        replace_existing=True,
-    )
-
-    scheduler.add_job(
-        delete_old_job_executions,
-        trigger=CronTrigger(day_of_week='mon', hour=0, minute=0),
-        id='delete_old_job_executions',
-        max_instances=1,
+        id="run_leave_increment",
         replace_existing=True,
     )
 
     scheduler.start()
-    logger.info('Scheduler started.')
